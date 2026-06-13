@@ -1,0 +1,2 @@
+// Exporta una constante para que otros archivos de Angular puedan importar la URL base de la API.
+export const API_BASE_URL = 'http://localhost:5268'; // URL base del backend ASP.NET Core V1; cambia el puerto si tu API usa otro.

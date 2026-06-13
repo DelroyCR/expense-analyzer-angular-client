@@ -1,62 +1,199 @@
-# expense-analyzer-angular-client
-Angular Frontend for Expense Analyzer V1 API
+# Expense Analyzer Angular Client
+
+Angular frontend for **Expense Analyzer V1**, a full-stack personal finance project built with an ASP.NET Core Web API backend.
+
+This client allows users to register, log in, access protected pages with JWT authentication, view and filter imported transactions, and upload CSV files.
+
+## Features
+
+* User registration
+* User login with JWT authentication
+* Protected routes with Angular route guards
+* JWT interceptor for authenticated API requests
+* Dashboard page
+* Transaction list
+* Transaction filtering by:
+  * Date range
+  * Minimum amount
+  * Maximum amount
+  * Description
+  * Import job ID
+* Transaction sorting by:
+  * Date
+  * Amount
+* Pagination
+* CSV file upload
+* Frontend validations
+* Session expiration handling
+* Basic navigation between main pages
+
+## Tech Stack
+
+* Angular
+* TypeScript
+* Reactive Forms
+* Angular Router
+* Angular HTTP Client
+* JWT authentication
+* ASP.NET Core Web API backend
+
+## Related Backend Repository
+
+This frontend consumes the Expense Analyzer V1 API.
+
+Backend repository:
+
+```
+https://github.com/DelroyCR/expense-analyzer-api
+```
+
+The backend provides:
+
+* Authentication endpoints
+* JWT generation and validation
+* Protected transaction endpoints
+* CSV import endpoint
+* PostgreSQL persistence
+* Filtering, sorting and pagination logic
+
+## Local Development
+
+### Requirements
+
+* Node.js
+* Angular CLI
+* Expense Analyzer V1 backend running locally
+
+### Backend URL
+
+The Angular client expects the backend API to run at:
+
+```
+http://localhost:5268
+```
+
+This value is configured in:
+
+```
+src/app/core/api/api.config.ts
+```
+
+Example:
+
+```
+export const API_BASE_URL = 'http://localhost:5268';
+```
+
+### Install dependencies
+
+```
+npm install
+```
+
+### Run the Angular app
+
+On Windows PowerShell, use:
+
+```
+ng.cmd serve -o
+```
+
+The frontend will run at:
+
+```
+http://localhost:4200
+```
+
 =======
-# ExpenseAnalyzerAngularClient
+## Main Routes
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.1.
-
-## Development server
-
-To start a local development server, run:
-
-```bash
-ng serve
+```
+/login
+/register
+/dashboard
+/transactions
+/imports
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Authentication Flow
 
-## Code scaffolding
+1. User creates an account using `/register`.
+2. User logs in using `/login`.
+3. Backend validates the credentials.
+4. Backend returns a JWT.
+5. Angular stores the token in localStorage.
+6. The HTTP interceptor sends the token in protected requests:
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+```
+Authorization: Bearer <token>
+```
+7. Protected backend endpoints validate the JWT.
 
-```bash
-ng generate component component-name
+## Transaction Features
+
+The `/transactions` page allows users to view imported transactions and apply filters.
+
+Supported filters:
+
+```
+From
+To
+MinAmount
+MaxAmount
+Description
+ImportJobId
+PageNumber
+PageSize
+SortBy
+SortDirection
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+The frontend also validates common invalid inputs before calling the backend, such as:
 
-```bash
-ng generate --help
-```
+* From date greater than To date
+* Negative minimum amount
+* Negative maximum amount
+* Minimum amount greater than maximum amount
 
-## Building
+## CSV Import
 
-To build the project run:
+The `/imports` page allows users to upload CSV files.
 
-```bash
-ng build
-```
+The frontend validates:
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+* A file was selected
+* The file has `.csv` extension
+* The file is not empty
 
-## Running unit tests
+After upload, the user receives feedback indicating how many rows were imported and skipped.
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## Session Expiration
 
-```bash
-ng test
-```
+If the backend returns `401 Unauthorized`, the frontend removes the stored token and shows a clear message asking the user to log in again.
 
-## Running end-to-end tests
+## Project Status
 
-For end-to-end (e2e) testing, run:
+Completed:
 
-```bash
-ng e2e
-```
+* Authentication
+* Register/Login
+* Protected routes
+* Dashboard
+* Transactions page
+* Filters and pagination
+* CSV upload
+* Basic navigation
+* Frontend validations
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Potential future improvements:
 
-## Additional Resources
+* Refresh tokens
+* Global error interceptor
+* Better UI components
+* Charts and summaries
+* Deployment
+* End-to-end tests
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Portfolio Summary
+
+Expense Analyzer Angular Client is the frontend for a full-stack financial transaction analysis project. It shows Angular fundamentals, API integration, JWT authentication, protected routes, reactive forms, frontend validation, and interaction with a real ASP.NET Core backend.

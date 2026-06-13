@@ -1,0 +1,39 @@
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+a {
+  color: #374151;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #2563eb;
+}
+
+a.active {
+  color: #2563eb;
+}
+
+button {
+  margin-left: auto;
+  padding: 0.6rem 0.9rem;
+  border: none;
+  border-radius: 8px;
+  background: #dc2626;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #b91c1c;
+}

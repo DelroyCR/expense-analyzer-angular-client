@@ -1,0 +1,41 @@
+<app-main-nav></app-main-nav>
+
+<h1>Expense Analyzer</h1>
+
+<section class="welcome-card">
+  <h2>Dashboard</h2>
+
+  <p>
+    Manage your imported transactions, review your financial data, and upload new CSV files.
+  </p>
+
+  <p *ngIf="isLoading()">
+    Loading current user...
+  </p>
+
+  <p class="error" *ngIf="errorMessage()">
+    {{ errorMessage() }}
+  </p>
+
+  <div *ngIf="user()">
+    <p>
+      <strong>Email:</strong> {{ user()?.email }}
+    </p>
+
+    <p>
+      <strong>Authenticated:</strong> {{ user()?.isAuthenticated }}
+    </p>
+  </div>
+</section>
+
+<section class="actions">
+  <a routerLink="/transactions" class="action-card">
+    <h3>Transactions</h3>
+    <p>View, filter, sort, and paginate your imported transactions.</p>
+  </a>
+
+  <a routerLink="/imports" class="action-card">
+    <h3>Import CSV</h3>
+    <p>Upload a CSV file and import new financial transactions.</p>
+  </a>
+</section>

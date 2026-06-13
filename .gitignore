@@ -28,6 +28,22 @@ pids
 !.vscode/extensions.json
 .idea/
 
+<<<<<<< HEAD
 # OS files
+=======
+# Miscellaneous
+/.angular/cache
+.sass-cache/
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
+__screenshots__/
+.angular/
+.env
+
+# System files
+>>>>>>> 0b07f74 (Add Angular client for Expense Analyzer)
 .DS_Store
 Thumbs.db

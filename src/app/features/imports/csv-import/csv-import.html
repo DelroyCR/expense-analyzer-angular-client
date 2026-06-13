@@ -1,0 +1,53 @@
+<app-main-nav></app-main-nav>
+
+<h1>Import CSV</h1>
+
+<section class="import-card">
+  <p>
+    Upload a CSV file to import financial transactions into your account.
+  </p>
+
+  <input
+    type="file"
+    accept=".csv"
+    (change)="onFileSelected($event)"
+  />
+
+  <p *ngIf="selectedFile">
+    Selected file: <strong>{{ selectedFile.name }}</strong>
+  </p>
+
+  <button type="button" (click)="upload()" [disabled]="!selectedFile || isUploading">
+    {{ isUploading ? 'Uploading...' : 'Upload CSV' }}
+  </button>
+
+  <p class="success" *ngIf="successMessage">
+    {{ successMessage }}
+  </p>
+
+  <p class="error" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </p>
+
+  <div class="summary" *ngIf="summary">
+    <h2>Import Summary</h2>
+
+    <p>
+      Imported rows: <strong>{{ summary.importedCount }}</strong>
+    </p>
+
+    <p>
+      Skipped rows: <strong>{{ summary.skippedCount }}</strong>
+    </p>
+
+    <div *ngIf="summary.errors && summary.errors.length > 0">
+      <h3>Errors</h3>
+
+      <ul>
+        <li *ngFor="let error of summary.errors">
+          {{ error }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>

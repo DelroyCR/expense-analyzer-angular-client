@@ -1,0 +1,81 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  padding: 2rem;
+  background: #f3f4f6;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  margin-bottom: 1.5rem;
+  color: #111827;
+}
+
+.welcome-card {
+  max-width: 720px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.welcome-card h2 {
+  margin-top: 0;
+  color: #111827;
+}
+
+.welcome-card p {
+  color: #374151;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  max-width: 720px;
+}
+
+.action-card {
+  display: block;
+  padding: 1.25rem;
+  background: white;
+  border-radius: 16px;
+  text-decoration: none;
+  color: #111827;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.action-card:hover {
+  transform: translateY(-2px);
+}
+
+.action-card h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.action-card p {
+  margin-bottom: 0;
+  color: #4b5563;
+}
+
+.logout-button {
+  margin-top: 1.5rem;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 10px;
+  background: #dc2626;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background: #b91c1c;
+}
+
+.error {
+  color: #dc2626;
+  font-weight: 700;
+}

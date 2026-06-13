@@ -1,0 +1,113 @@
+<app-main-nav></app-main-nav>
+
+<h1>Transactions</h1>
+
+<form [formGroup]="filterForm" (ngSubmit)="applyFilters()" class="filters">
+  <input
+    type="date"
+    formControlName="from"
+    title="From"
+  />
+
+  <input
+    type="date"
+    formControlName="to"
+    title="To"
+  />
+
+  <input
+    type="number"
+    formControlName="minAmount"
+    placeholder="MinAmount"
+  />
+
+  <input
+    type="number"
+    formControlName="maxAmount"
+    placeholder="MaxAmount"
+  />
+
+  <input
+    type="text"
+    formControlName="description"
+    placeholder="Description"
+  />
+
+  <input
+    type="text"
+    formControlName="importJobId"
+    placeholder="ImportJobId"
+  />
+
+  <select formControlName="sortBy">
+    <option value="">Default sort</option>
+    <option value="Date">Date</option>
+    <option value="Amount">Amount</option>
+  </select>
+
+  <select formControlName="sortDirection">
+    <option value="">Default direction</option>
+    <option value="asc">Asc</option>
+    <option value="desc">Desc</option>
+  </select>
+
+  <button type="submit" [disabled]="isLoading()">
+    Apply filters
+  </button>
+
+  <button type="button" (click)="clearFilters()" [disabled]="isLoading()">
+    Clear
+  </button>
+</form>
+
+<p *ngIf="isLoading()">
+  Loading transactions...
+</p>
+
+<p class="error" *ngIf="errorMessage()">
+  {{ errorMessage() }}
+</p>
+
+<p *ngIf="!isLoading() && !errorMessage()">
+  Total transactions: {{ totalCount() }}
+</p>
+
+<table *ngIf="!isLoading() && transactions().length > 0">
+  <thead>
+    <tr>
+      <th>TransactionId</th>
+      <th>Date</th>
+      <th>Description</th>
+      <th>Amount</th>
+      <th>ImportJobId</th>
+      <th>CreatedAtUtc</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let transaction of transactions()">
+      <td>{{ transaction.transactionId }}</td>
+      <td>{{ transaction.date | date:'yyyy-MM-dd' }}</td>
+      <td>{{ transaction.description }}</td>
+      <td>{{ transaction.amount }}</td>
+      <td>{{ transaction.importJobId }}</td>
+      <td>{{ transaction.createdAtUtc | date:'yyyy-MM-dd HH:mm' }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<p *ngIf="!isLoading() && !errorMessage() && transactions().length === 0">
+  No transactions found.
+</p>
+
+<div class="pagination" *ngIf="!isLoading() && !errorMessage()">
+  <button type="button" (click)="previousPage()" [disabled]="!hasPreviousPage()">
+    Previous
+  </button>
+
+  <span>Page {{ pageNumber() }} of {{ totalPages() || 1 }}</span>
+
+  <button type="button" (click)="nextPage()" [disabled]="!hasNextPage()">
+    Next
+  </button>
+</div>
